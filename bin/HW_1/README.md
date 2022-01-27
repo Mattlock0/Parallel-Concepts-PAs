@@ -4,6 +4,7 @@ To compile the program, type the following into the command prompt: (while in th
 `javac assignment1.java`
 
 And to run, use the following command:
+
 `java assignment1`
 
 ## Proof of Correctness and Efficiency
