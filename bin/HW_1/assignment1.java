@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.*;
 import java.util.LinkedList;
 import java.time.Duration;
+import java.io.*;
 
 class threadPrimer extends Thread {
     static Counter2 counter = new Counter2(2);          // starting the counter at 2
@@ -67,9 +68,15 @@ public class assignment1 {
         Instant finish = Instant.now();                 // stopping the timer and converting it to milliseconds
         long timeElapsed = Duration.between(start, finish).toMillis();
 
-        System.out.println("The execution took " + timeElapsed + "ms. and found " + numPrimes + " prime numbers.");
-        System.out.println("In total, the primes were added up to " + totalPrime + ".");
-        System.out.print("The highest ten primes found were "); // print out
+        // print to file
+        FileWriter f = new FileWriter("../../lib/primes.txt");
+        f.write("The execution took " + timeElapsed + "ms. and found " + numPrimes + " prime numbers.\n");
+        f.write("In total, the primes add up to " + totalPrime + ".\n");
+        f.write("The highest ten primes found were ");
+        
+        /*System.out.println("The execution took " + timeElapsed + "ms. and found " + numPrimes + " prime numbers.");
+        System.out.println("In total, the primes add up to " + totalPrime + ".");
+        System.out.println("The highest ten primes found were "); // print out*/
 
         int[] setOfMaxPrimes = new int[10];
         
@@ -82,6 +89,7 @@ public class assignment1 {
             }
         }
 
-        System.out.println(Arrays.toString(setOfMaxPrimes));
+        f.write(Arrays.toString(setOfMaxPrimes) + "\n");
+        f.close();
     }
 }

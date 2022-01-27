@@ -1,0 +1,3 @@
+The execution took 1700ms. and found 5761455 prime numbers.
+In total, the primes add up to 279209790387276.
+The highest ten primes found were [99999787, 99999821, 99999827, 99999839, 99999847, 99999931, 99999941, 99999959, 99999971, 99999989]
