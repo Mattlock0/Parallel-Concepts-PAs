@@ -5,7 +5,6 @@ And to run, use the following command:
 `java assignment1`
 
 ## Proof of Correctness and Efficiency
----
 In doing this project I messed around with a few different methods. I had a "brute force" method
 which simply had each thread calculate if the number they were on was prime. And while this worked, 
 it was far too slow. So I did some research and found out about the Sieve of Eratosthenes.
