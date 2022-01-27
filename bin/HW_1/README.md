@@ -1,5 +1,5 @@
 # Compiling and Running
-To compile the program, type the following into the command prompt: (while in this `bin` directory)
+To compile the program, type the following into the command prompt: (while in this directory)
 `javac assignment1.java`
 And to run, use the following command:
 `java assignment1`
