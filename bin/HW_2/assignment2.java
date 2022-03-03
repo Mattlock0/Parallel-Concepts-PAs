@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.concurrent.locks.ReentrantLock;
 
 class Guest extends Thread {
     static Cupcake cupcake = new Cupcake(true); // the cupcake starts as there
@@ -77,6 +78,23 @@ class Guest extends Thread {
     }
 }
 
+class Guest_2 extends Thread {
+    private final ReentrantLock lock = new ReentrantLock(); // our sign
+    
+    public void run() {  
+        lock.lock(); // setting the sign to "BUSY".
+        try {
+            System.out.println("Guest " + Thread.currentThread().getId() + " visited the vase.");
+            // Print out for the visitor examining the vase
+        } catch (Exception e) {
+            System.out.println("EXCEPTION CAUGHT");
+            e.printStackTrace();
+        } finally {
+            lock.unlock(); // setting the sign back to "AVAILABLE".
+        }
+    }
+}
+
 public class assignment2 {
     public static int numGuests = 25;
 
@@ -102,7 +120,6 @@ public class assignment2 {
             }
         
             int chosen = rand.nextInt(assignment2.numGuests); // picking a random guest
-            //System.out.println("Guest " + chosen + " has entered.");
             guests[chosen].enter(); // allow the guest to enter
 
             while(guests[chosen].inside()) { // while they're doing their thing inside
@@ -127,8 +144,23 @@ public class assignment2 {
             e.printStackTrace();
         }
 
-
         // PROBLEM 2
+        Guest_2[] vase_guests = new Guest_2[numGuests];
 
+        for (int i = 0; i < numGuests; i++) {
+            vase_guests[i] = new Guest_2();
+            vase_guests[i].start(); // starting each thread
+        }
+
+        try {
+            for (int i = 0; i < numGuests; i++) {
+                vase_guests[i].join(); // joining them to make sure each is done
+            }
+        } catch (Exception e) {
+            System.out.println("EXCEPTION CAUGHT");
+            e.printStackTrace();
+        } // making sure they're all done before printing exit
+
+        System.out.println("No more guests waiting to see the vase.");
     }
 }
