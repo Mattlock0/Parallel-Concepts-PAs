@@ -82,21 +82,26 @@ class Guest_2 extends Thread {
     private final ReentrantLock lock = new ReentrantLock(); // our sign
     
     public void run() {  
-        lock.lock(); // setting the sign to "BUSY".
-        try {
-            System.out.println("Guest " + Thread.currentThread().getId() + " visited the vase.");
-            // Print out for the visitor examining the vase
-        } catch (Exception e) {
-            System.out.println("EXCEPTION CAUGHT");
-            e.printStackTrace();
-        } finally {
-            lock.unlock(); // setting the sign back to "AVAILABLE".
+        Random rand = new Random();
+        int times = rand.nextInt(11); // the guests can visit the vase up to ten times
+        
+        for(int i = 0; i < times; i++) {
+            lock.lock(); // setting the sign to "BUSY".
+            try {
+                System.out.println("Guest " + Thread.currentThread().getId() + " visited the vase.");
+                // Print out for the visitor examining the vase
+            } catch (Exception e) {
+                System.out.println("EXCEPTION CAUGHT");
+                e.printStackTrace();
+            } finally {
+                lock.unlock(); // setting the sign back to "AVAILABLE".
+            }
         }
     }
 }
 
 public class assignment2 {
-    public static int numGuests = 25;
+    public static int numGuests = 100;
 
     public static void main(String[] args) throws Exception {
         // PROBLEM 1
